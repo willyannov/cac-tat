@@ -1,8 +1,8 @@
 import signup from '../pages/signup'
 import signupdata from '../factories/signupdata'
 
-describe('CAC-TAT', function()  {
-  it('Home verify and fillform', function()  {
+describe('CAC-TAT', function () {
+  it('Home verify and fillform', function () {
     var user = signupdata.user()
 
     signup.homepage()
@@ -12,14 +12,21 @@ describe('CAC-TAT', function()  {
 
   })
 
-  it.only('Required Fields', function() {
-    var user = signupdata.user()
-    
+  it('Required Fields', function () {
+
     signup.homepage()
     signup.submit()
     signup.checkfailed('Valide os campos obrigatórios!')
-    
+
   });
 
-  
+  it.only('check and uncheck checkbox', function () {
+    signup.homepage()
+
+    cy.get('#check input[type=checkbox]').check('phone');
+    cy.get('#check input[type=checkbox]').uncheck('phone');
+
+  });
+
+
 })
