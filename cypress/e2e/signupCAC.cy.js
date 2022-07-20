@@ -12,5 +12,14 @@ describe('CAC-TAT', function()  {
 
   })
 
+  it.only('Required Fields', function() {
+    var user = signupdata.user()
+    
+    signup.homepage()
+    signup.submit()
+    signup.checkfailed('Valide os campos obrigatórios!')
+    
+  });
+
   
 })
