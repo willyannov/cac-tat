@@ -1,19 +1,19 @@
-export default{
+export default {
 
-    user: function(){
+    user: function () {
 
-        var data={
+        var data = {
 
-            name:'Willyan',
-            lastname:'Moraes',
-            email:'willyan@hotmail.com',
-            product:'Cursos',
-            message:'Belo Curso'
-
+            name: 'Willyan',
+            lastname: 'Moraes',
+            email: 'willyan@hotmail.com',
+            product: 'Cursos',
+            message: 'Belo Curso',
+            image: 'cnh-digital.jpg.jpg'
 
         }
 
-
+        return data
     }
 
 
