@@ -12,6 +12,20 @@ describe('CAC-TAT', function () {
 
   })
 
+  it('Invalid Email', function()  {
+    var user = signupdata.user()
+
+    user.email = 'willyan.com.com'
+    
+    signup.homepage()
+    signup.fillform(user)
+    signup.submit()
+    signup.checkfailed('Valide os campos obrigatórios!')
+    
+  });
+
+
+
   it('Required Fields', function () {
 
     signup.homepage()
