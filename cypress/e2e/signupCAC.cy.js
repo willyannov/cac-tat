@@ -1,6 +1,8 @@
 import signup from '../pages/signup'
 import signupdata from '../factories/signupdata'
 
+
+
 describe('CAC-TAT', function () {
   it('Home verify and Fillform', function () {
     var user = signupdata.user()
@@ -75,6 +77,93 @@ describe('CAC-TAT', function () {
     signup.privacypage()
 
   });
+
+  it('Clock Addition in signup.js', function () {
+    signup.homepage()
+    signup.submit()
+    signup.checkfailed('Valide os campos obrigatórios!')
+
+
+
+  });
+
+  it('Show and hide messages', function () {
+    signup.homepage()
+    cy.get('.success')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible')
+      .and('contain', 'Mensagem enviada com sucesso.')
+      .invoke('hide')
+      .should('not.be.visible')
+    cy.get('.error')
+      .should('not.be.visible')
+      .invoke('show')
+      .should('be.visible')
+      .and('contain', 'Valide os campos obrigatórios!')
+      .invoke('hide')
+      .should('not.be.visible');
+  });
+
+
+  it('Fill TextArea using invoke', function () {
+    const longText = Cypress._.repeat('0123123123', 20)
+
+    signup.homepage()
+
+    cy.get('.field #open-text-area')
+      .invoke('val', longText)
+      .should('have.value', longText)
+  });
+
+  it('Make a request HTTP', function () {
+    cy.request('https://cac-tat.s3.eu-central-1.amazonaws.com/index.html')
+      .should(function (response) {
+        const { status, statusText, body } = response
+        expect(status).to.equal(200)
+        expect(statusText).to.equal('OK')
+        expect(body).to.include('CAC TAT')
+
+      })
+
+
+  });
+
+  it.only('Find Cat', function()  {
+    signup.homepage()
+    cy.get('#cat')
+      .invoke('show')
+      .should('have.text', '🐈');
+      
+    
+    
+  });
+
+
+
+
+
+
+  Cypress._.times(5, function () { //documentação do lodash https://docs.cypress.io/api/utilities/_#Syntax
+
+    it('Test Lodash Functions', function () {
+      const longText = Cypress._.repeat('0123123123', 20)
+
+      signup.homepage();
+      cy.get('.field #open-text-area').type(longText).should('have.value', longText)
+      signup.submit();
+
+    });
+
+
+
+
+
+
+  });
+
+
+
 
 
 })

@@ -23,7 +23,7 @@ class signup {
 
     }
 
-    privacypage(){
+    privacypage() {
         cy.visit('/privacy.html');
         cy.get('#title').should('have.text', 'CAC TAT - Política de privacidade');
 
@@ -36,13 +36,20 @@ class signup {
     }
 
     checksuccess(expectatemessage) {
+        cy.clock()
         cy.contains('.success', expectatemessage).should('be.visible')
-
+        cy.tick(3000)
+        cy.contains('.success', expectatemessage).should('not.be.visible')
     }
 
     checkfailed(expectatemessage) {
+        cy.clock()
         cy.contains('.error', expectatemessage).should('be.visible')
+        cy.tick(3000)
+        cy.contains('.error', expectatemessage).should('not.be.visible')
     }
+
+
 
 }
 
