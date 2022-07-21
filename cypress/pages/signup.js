@@ -1,5 +1,5 @@
 import 'cypress-file-upload'
-import { delay } from 'cypress/types/bluebird';
+
 
 class signup {
 
@@ -18,16 +18,19 @@ class signup {
         cy.get('#support-type input[type=radio]').check('elogio');
         cy.get('.field #product').select(user.product);
         cy.get('#check input[type=checkbox]').check('phone');
-        cy.get('.field #open-text-area').type(user.message, {delay: 0}); //delay: 0 é usado para diminuir o tempo de digitação do cypress em caso de textos longos
+        cy.get('.field #open-text-area').type(user.message, { delay: 0 }); //delay: 0 é usado para diminuir o tempo de digitação do cypress em caso de textos longos
         cy.get('input[type^=file]').attachFile('/images/' + user.image);
 
+    }
 
+    privacypage(){
+        cy.visit('/privacy.html');
+        cy.get('#title').should('have.text', 'CAC TAT - Política de privacidade');
 
 
     }
 
     submit() {
-
         cy.get('div button[type=submit]').click();
 
     }
@@ -37,7 +40,7 @@ class signup {
 
     }
 
-    checkfailed(expectatemessage){
+    checkfailed(expectatemessage) {
         cy.contains('.error', expectatemessage).should('be.visible')
     }
 
